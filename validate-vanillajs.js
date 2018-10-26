@@ -21,15 +21,10 @@
 
 		// Define settings
 		this.settings = {
-			onclick        : false,
-			onkeyup        : false,
-			onfocusin      : false,
-			onfocusout     : false,
 			elements       : {},
 			rules          : {},
 			messages       : {},
 			errorPlacement : false,
-			invalidHandler : false,
 		};
 
 		// Default validation methods
