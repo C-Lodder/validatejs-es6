@@ -6,7 +6,7 @@ Small, fast and flexible Javascript validation library
 
 ### Import the validation script on your page:
 ```
-<script src="validate-vanillajs.js">
+<script src="validate-vanillajs.js"></script>
 ```
 
 ### Create a simple input field:
