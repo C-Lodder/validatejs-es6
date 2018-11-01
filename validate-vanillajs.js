@@ -5,8 +5,6 @@
  *  Copyright: (c) Charlie Lodder 2018
  */
 
- 
- 
 class Validator {
 
 	constructor(rules, messages, errorPlacement, invalidHandler) {
