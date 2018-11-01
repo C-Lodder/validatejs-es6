@@ -1,7 +1,15 @@
-(() => {
 
-	// Define our constructor 
-	this.Validator = () => {
+class Validator {
+
+	constructor(rules, messages, errorPlacement, invalidHandler) {
+		// Define settings
+		this.settings = {
+			elements       : {},
+			rules          : {},
+			messages       : {},
+			errorPlacement : false,
+			invalidHandler : false,
+		};
 
 		// Default messages
 		this.messages = {
@@ -19,19 +27,11 @@
 			min         : 'Please enter a value greater than or equal to {0}.',
 		};
 
-		// Define settings
-		this.settings = {
-			elements       : {},
-			rules          : {},
-			messages       : {},
-			errorPlacement : false,
-		};
-
 		// Default validation methods
 		this.methods = {
 
 			// Check if the value length is no bigger than zero
-			required : (value, element, param) => => {
+			required : (value, element, param) => {
 				return value.length > 0;
 			},
 
@@ -67,14 +67,14 @@
 
 			// Check if the length of the value is within the specified range
 			rangelength: (value, element, param) => {
-				const length = Array.isArray(value) ? getLength(value, element) : value.length;
+				const length = Array.isArray(value) ? this.getLength(value, element) : value.length;
 
 				return length >= param[0] && length <= param[1];
 			},
 
 			// Check if the value is within the specified range
 			range: (value, element, param) => {
-				const length = Array.isArray(value) ? getLength(value, element) : value;
+				const length = Array.isArray(value) ? this.getLength(value, element) : value;
 
 				return value >= param[0] && value <= param[1];
 			},
@@ -102,15 +102,15 @@
 
 		// Extend the settings object if any arguments are passed
 		if (arguments[0] && typeof arguments[0] === 'object') {
-			this.settings = extendDefaults(this.settings, arguments[0]);
+			this.settings = this.extendDefaults(this.settings, arguments[0]);
 		}
 
 		// Get the form elements and save them to the settings object so they can be used at a later time
-		this.settings.elements = setFormElements.call(this, this.settings.rules);
+		this.settings.elements = this.setFormElements.call(this, this.settings.rules);
 	}
 
-	// Public Methods
-	Validator.prototype.validate = (element) => {
+	// Methods
+	validate(element) {
 		const self = this;
 
 		// If the element doesn't exist, don't proceed
@@ -118,21 +118,15 @@
 			return true;
 		}
 
-		var isForm = element.nodeName.toLowerCase() === 'form';
+		const isForm = element.tagName.toLowerCase() === 'form';
 
 		// If we're not dealing with the entire form and the element ID doesn't exist in the rules object, don't proceed
 		if (!isForm && self.settings.rules[element.id] === undefined) {
 			return true;
 		}
 
-		// If the element is disabled or readonly, don't proceed
-
-		// TO-DO: IGNORE HIDDEN ELEMENTS TOO
-		// They have a CSS display value of none.
-		// They are form elements with type="hidden".
-		// Their width and height are explicitly set to 0.
-		// An ancestor element is hidden, so the element is not shown on the page.
-		if (element.disabled || element.readOnly) {
+		// If the element is hidden, invisible, disabled or readonly, don't proceed
+		if (element.hidden || element.style.visibility === 'hidden' || element.disabled || element.readOnly) {
 			return true;
 		}
 
@@ -141,13 +135,13 @@
 		// If the element is the form, we'll validate everything
 		if (isForm) {
 			// Validate all cached form fields
-			self.settings.elements.forEach((field)=> {
-				isValid.push(_validate.call(self, field));
+			self.settings.elements.forEach((field) => {
+				isValid.push(this._validate.call(self, field));
 			});
 		}
 		// Else validate the single element
 		else {
-			isValid.push(_validate.call(self, element));
+			isValid.push(this._validate.call(self, element));
 		}
 
 		// If 'false' exists in the array, then the element is not valid
@@ -155,7 +149,7 @@
 	}
 
 	// Add a custom method
-	Validator.prototype.addMethod = (name, method, param) => {
+	addMethod(name, method, param) {
 		// If no method is defined, throw a warning and don't proceed
 		if (method === undefined) {
 			console.warn('A method must be defined when using addMethod()');
@@ -167,7 +161,7 @@
 	}
 
 	// Cache the form elements
-	function setFormElements(rules) {
+	setFormElements(rules) {
 		const elements = [];
 		Object.keys(rules).forEach((key) => {
 			const element = document.querySelector(`#${key}`);
@@ -179,8 +173,7 @@
 		return elements;
 	}
 
-	// Private function to perform the validation
-	function _validate(element) {
+	_validate(element) {
 		// Get the rules for the element
 		const rules   = this.settings.rules[element.id];
 		const isValid = [];
@@ -204,7 +197,7 @@
 
 							if (this.messages[key]) {
 								// Set the error as the default message if it exists
-								error = format(this.messages[key], rule);
+								error = this.format(this.messages[key], rule);
 							}
 							else if (this.settings.messages[element.id][key]) {
 								// Else if we have a custom message, use that instead
@@ -227,17 +220,16 @@
 	}
 
 	// Wrapper method to get the value length of different elements
-	function getLength(value, element) {
+	getLength(value, element) {
 		// If the element is a select dropdown, get the value of the selected option
-		if (element.nodeName.toLowerCase() === 'select') {
+		if (element.tagName.toLowerCase() === 'select') {
 			return element.options[element.selectedIndex].value.length;
 		}
 
 		return value.length;
 	};
 
-	// Format a message by replacing instances of "{x}"
-	function format(message, rule) {
+	format(message, rule) {
 		// Search the message for instances of "{x}"
 		const params = message.match(/\{([0-9]+)\}/g);
 
@@ -251,7 +243,7 @@
 	}
 
 	// Extend an object by merging it with another object
-	function extendDefaults(source, properties) {
+	extendDefaults(source, properties) {
 		let property;
 
 		for (property in properties) {
@@ -262,5 +254,4 @@
 
 		return source;
 	}
-
-}());
+}
