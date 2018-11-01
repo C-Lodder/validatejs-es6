@@ -1,3 +1,9 @@
+/*
+ *	Package:   Validate VanillaJS
+ *	Version:   v0.9.0
+ *	Author :   Charlie Lodder
+ *  Copyright: (c) Charlie Lodder 2018
+ */
 
 class Validator {
 
