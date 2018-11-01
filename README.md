@@ -16,7 +16,7 @@ Small, fast and flexible Javascript validation library
 
 ### Basic usage:
 ```
-const Validator = new semafoneValidator({
+const Validator = new Validator({
 	rules: {
 		// Ensure the property matches that of the input ID
 		name: {
