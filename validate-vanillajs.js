@@ -80,8 +80,6 @@ class Validator {
 
 			// Check if the value is within the specified range
 			range: (value, element, param) => {
-				const length = Array.isArray(value) ? this.getLength(value, element) : value;
-
 				return value >= param[0] && value <= param[1];
 			},
 
