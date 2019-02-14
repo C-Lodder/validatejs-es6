@@ -28,7 +28,7 @@ const Validator = new Validator({
 			required: 'Please enter your name',
 		},
 	},
-	errorPlacement: function(error, element) {
+	errorPlacement: (error, element) => {
 		alert(error);
 		// You can append the error to an element below the input or anything else to your liking
 	}
