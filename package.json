@@ -1,0 +1,36 @@
+{
+  "name": "validatejs-es6",
+  "description": "Blazing fast Javascript validation library",
+  "version": "0.9.0",
+  "keywords": [
+    "javascript",
+    "validate",
+    "validation",
+    "es6",
+    "form"
+  ],
+  "homepage": "https://github.com/C-Lodder/validatejs-es6",
+  "author": "Charlie Lodder",
+  "license": "MIT",
+  "main": "src/htmlminifier.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C-Lodder/validatejs-es6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/C-Lodder/validatejs-es6/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "terser": "^3.16.1"
+  }
+}

@@ -1,12 +1,12 @@
-# validate-vanillajs
+# ValidateJS-ES6
 
-Small, fast and flexible Javascript validation library
+Blazing fast Javascript validation library
 
 # Usage
 
 ### Import the validation script on your page:
 ```
-<script src="validate-vanillajs.js"></script>
+<script src="validate.js"></script>
 ```
 
 ### Create a simple input field:
