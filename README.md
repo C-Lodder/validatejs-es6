@@ -4,13 +4,13 @@ Blazing fast Javascript validation library
 
 # Usage
 
-### Import the validation script on your page:
+### Include the validation script on your page:
 ```
 <script src="validate.min.js"></script>
 ```
-or if you need to support Internet Explorer, then use `es5` version:
+or import it:
 ```
-<script src="validate-es5.min.js"></script>
+import Validator from "./validate.min.js"
 ```
 
 ### Create a simple input field:
