@@ -4,14 +4,16 @@ Blazing fast Javascript validation library
 
 # Usage
 
-### Import the validation script on your page:
+### Include the validation script on your page:
 ```
 <script src="validate.min.js"></script>
 ```
-or if you need to support Internet Explorer, then use `es5` version:
+or import it:
 ```
-<script src="validate-es5.min.js"></script>
+import Validator from "./validate.min.js"
 ```
+
+Should you require support for Internet Explorer, use `validate-es5.min.js` intead
 
 ### Create a simple input field:
 ```
@@ -20,7 +22,7 @@ or if you need to support Internet Explorer, then use `es5` version:
 
 ### Basic usage:
 ```
-const Validator = new Validator({
+const Validation = new Validator({
 	rules: {
 		// Ensure the property matches that of the input ID
 		name: {
@@ -41,7 +43,7 @@ const Validator = new Validator({
 
 ### Validate an element
 ```
-const isValid = Validator.validate(document.getElementById('name'));
+const isValid = Validation.validate(document.getElementById('name'));
 
 // Returns true or false
 ```

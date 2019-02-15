@@ -5,7 +5,7 @@
  * @copyright (c) Charlie Lodder 2019
  */
 
-class Validator {
+export default class Validator {
   constructor(rules, messages, errorPlacement, invalidHandler) {
     // Define settings
     this.settings = {
