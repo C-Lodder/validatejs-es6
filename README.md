@@ -20,7 +20,7 @@ import Validator from "./validate.min.js"
 
 ### Basic usage:
 ```
-const Validator = new Validator({
+const Validation = new Validator({
 	rules: {
 		// Ensure the property matches that of the input ID
 		name: {
@@ -41,7 +41,7 @@ const Validator = new Validator({
 
 ### Validate an element
 ```
-const isValid = Validator.validate(document.getElementById('name'));
+const isValid = Validation.validate(document.getElementById('name'));
 
 // Returns true or false
 ```
