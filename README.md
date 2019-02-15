@@ -13,6 +13,8 @@ or import it:
 import Validator from "./validate.min.js"
 ```
 
+Should you require support for Internet Explorer, use `validate-es5.min.js` intead
+
 ### Create a simple input field:
 ```
 <input type="text" id="name">
